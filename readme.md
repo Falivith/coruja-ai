@@ -9,3 +9,6 @@ poetry run uvicorn src.llm_api:app --reload
 curl -X POST http://localhost:8000/ask \
  -H "Content-Type: application/json" \
  -d '{"text": "Fale quanto é 5+5", "pre-prompt": "Be clear, serious, and answer fast: ", "model": "qwen3:4b"}'
+
+# to remove model from memory
+curl http://localhost:11434/api/generate -d '{"model": "gemma3:1b", "keep_alive": 0}'
