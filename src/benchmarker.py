@@ -1,48 +1,71 @@
 import os
-import subprocess
-import time
-import psutil
-import requests
-import json
-from datasets import load_dataset
-from threading import Thread
 import re
+import time
+import json
+import psutil
+import subprocess
+import requests
+from threading import Thread
+from datasets import load_dataset
 
+# Constants and Regex
+OLLAMA_URL = "http://localhost:11434/api/generate"
+MODEL = "gemma3:1b"
+OLLAMA_PROCESS_NAME = "ollama"
 ANSI_ESCAPE = re.compile(r'\x1B[@-_][0-?]*[ -/]*[@-~]')
 SPINNER_CHARS = re.compile(r'[⠋⠙⠸⠴⠦⠇⠏⠼⠹⠧]')
 
-def remove_ansi_codes(text):
+# Dataset loading
+dataset = load_dataset("maritaca-ai/enem", "2024")
+questions = dataset['train']
+
+# Utility functions
+def remove_ansi(text):
     text = ANSI_ESCAPE.sub('', text)
-    text = SPINNER_CHARS.sub('', text)
-    return text
+    return SPINNER_CHARS.sub('', text)
 
+def get_unique_filename(base_name, ext):
+    counter = 0
+    while True:
+        filename = f"{base_name}{'' if counter == 0 else '_' + str(counter)}.{ext}"
+        if not os.path.exists(filename):
+            return filename
+        counter += 1
 
-# Configuração
-OLLAMA_URL = "http://localhost:11434/api/generate"
-MODEL = "gemma3n:e2b"
-#MODEL = "gemma3:1b"
-OLLAMA_PROCESS_NAME = "ollama"
+def get_ollama_processes():
+    return [psutil.Process(p.info['pid']) for p in psutil.process_iter(['pid', 'name']) if OLLAMA_PROCESS_NAME in p.info['name']]
 
-ds = load_dataset("maritaca-ai/enem", "2024")
-questoes = ds['train']
+def get_cpu_temperature():
+    try:
+        with open("/sys/class/thermal/thermal_zone0/temp", "r") as f:
+            return int(f.read()) / 1000.0
+    except:
+        return None
 
-def extrair_stats(texto_completo):
-    # Expressão regular para capturar o bloco de stats entre 'total duration:' e o último 'rate: ...tokens/s'
-    pattern = re.compile(
-        r"(total duration:.*?rate:\s*[0-9.]+\s*tokens/s)",
-        re.DOTALL
-    )
-    match = pattern.search(texto_completo)
+def monitor_resources(processes, mem_log, temp_log, stop_flag):
+    while all(p.is_running() for p in processes) and not stop_flag['stop']:
+        try:
+            mem_usage = sum(p.memory_info().rss for p in processes) / (1024 * 1024)
+            mem_log.append(mem_usage)
 
-    stats_dict = {}
+            temp = get_cpu_temperature()
+            if temp is not None:
+                temp_log.append(temp)
+
+            time.sleep(0.1)
+        except psutil.NoSuchProcess:
+            break
+
+def extract_stats(text):
+    pattern = re.compile(r"(total duration:.*?rate:\s*[0-9.]+\s*tokens/s)", re.DOTALL)
+    match = pattern.search(text)
+    stats = {}
+    clean_text = text
 
     if match:
-        stats_text = match.group(1).strip()
+        stats_block = match.group(1).strip()
+        clean_text = text.replace(stats_block, "").strip()
 
-        # Remove o trecho de stats do texto original
-        texto_limpo = texto_completo.replace(stats_text, "").strip()
-
-        # Expressões regulares individuais para cada campo
         patterns = {
             "total_duration_s": r"total duration:\s+([\d.]+)s",
             "load_duration_ms": r"load duration:\s+([\d.]+)ms",
@@ -55,197 +78,110 @@ def extrair_stats(texto_completo):
         }
 
         for key, pat in patterns.items():
-            m = re.search(pat, stats_text)
-            if m:
-                val = m.group(1)
-                stats_dict[key] = float(val) if '.' in val else int(val)
-    else:
-        texto_limpo = texto_completo.strip()
+            match = re.search(pat, stats_block)
+            if match:
+                value = match.group(1)
+                stats[key] = float(value) if '.' in value else int(value)
 
-    return texto_limpo, stats_dict
+    return clean_text, stats
 
-def get_unique_filename(base_name, ext):
-    counter = 0
-    while True:
-        filename = f"{base_name}{'' if counter == 0 else '_' + str(counter)}.{ext}"
-        if not os.path.exists(filename):
-            return filename
-        counter += 1
-
-filename = get_unique_filename("resultados_enem_ollama_verbose", "json")
-
-def get_ollama_processes():
-    return [psutil.Process(p.info['pid']) for p in psutil.process_iter(['pid', 'name']) if OLLAMA_PROCESS_NAME in p.info['name']]
-
-def get_cpu_temperature():
-    try:
-        with open("/sys/class/thermal/thermal_zone0/temp", "r") as f:
-            temp_str = f.read()
-            return int(temp_str) / 1000.0
-    except:
-        return None
-
-def monitor_memory_and_temp(processes, mem_log, temp_log, stop_flag):
-    while all(p.is_running() for p in processes) and not stop_flag['stop']:
-        try:
-            mem_total = sum(p.memory_info().rss for p in processes) / (1024 * 1024)  # MB
-            mem_log.append(mem_total)
-
-            temp = get_cpu_temperature()
-            if temp is not None:
-                temp_log.append(temp)
-
-            time.sleep(0.1)
-        except psutil.NoSuchProcess:
-            break
-
-def perguntar_ollama_verbose(prompt, max_retries=1, timeout_s=360):
+def ask_ollama_verbose(prompt, max_retries=1, timeout=360):
     for attempt in range(max_retries + 1):
-        print(f"Tentativa {attempt + 1} de {max_retries + 1}...")
+        print(f"Attempt {attempt + 1} of {max_retries + 1}...")
         processes = get_ollama_processes()
         if not processes:
-            print("Processo do Ollama não encontrado")
+            print("Ollama process not found")
             return "", 0, {}, 0, 0
 
-        mem_log = []
-        temp_log = []
+        mem_log, temp_log = [], []
         stop_flag = {'stop': False}
-
-        monitor_thread = Thread(target=monitor_memory_and_temp, args=(processes, mem_log, temp_log, stop_flag))
-        monitor_thread.daemon = True
-        monitor_thread.start()
+        monitor = Thread(target=monitor_resources, args=(processes, mem_log, temp_log, stop_flag))
+        monitor.daemon = True
+        monitor.start()
 
         command = ["ollama", "run", MODEL, "--verbose"]
+        start_time = time.time()
 
-        inicio = time.time()
         try:
-            process = subprocess.Popen(
-                command,
-                stdin=subprocess.PIPE,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.STDOUT,
-                text=True,
-                bufsize=1
-            )
+            proc = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1)
+            proc.stdin.write(prompt + "\n")
+            proc.stdin.flush()
+            proc.stdin.close()
 
-            process.stdin.write(prompt + "\n")
-            process.stdin.flush()
-            process.stdin.close()
-
-            output_lines = []
+            output = []
             while True:
-                if time.time() - inicio > timeout_s:
-                    print(f"\nTimeout de {timeout_s}s atingido. Matando o processo...")
-                    process.kill()
+                if time.time() - start_time > timeout:
+                    print("\nTimeout reached. Terminating process...")
+                    proc.kill()
                     try:
-                        process.wait(timeout=5)
+                        proc.wait(timeout=5)
                     except subprocess.TimeoutExpired:
-                        process.terminate()
+                        proc.terminate()
                     break
 
-                line = process.stdout.readline()
-                if line == '' and process.poll() is not None:
+                line = proc.stdout.readline()
+                if line == '' and proc.poll() is not None:
                     break
                 if line:
                     print(line, end="")
-                    output_lines.append(line)
+                    output.append(line)
 
-            fim = time.time()
-            tempo = fim - inicio
-
+            end_time = time.time()
             stop_flag['stop'] = True
-            monitor_thread.join()
+            monitor.join()
 
-            resposta_completa = "".join(output_lines)
-            model_answer, stats = extrair_stats(resposta_completa)
-            texto_limpo = remove_ansi_codes(model_answer).strip()
+            full_response = "".join(output)
+            clean_text, stats = extract_stats(full_response)
+            clean_text = remove_ansi(clean_text).strip()
 
-            return texto_limpo, tempo, stats, max(mem_log) if mem_log else 0, max(temp_log) if temp_log else 0
+            return clean_text, end_time - start_time, stats, max(mem_log, default=0), max(temp_log, default=0)
 
         except Exception as e:
-            print(f"Erro inesperado: {e}")
+            print(f"Error: {e}")
             stop_flag['stop'] = True
-            monitor_thread.join()
-            continue
+            monitor.join()
 
     return "", 0, {}, 0, 0
-    
-def perguntar_ollama(prompt):
-    processes = get_ollama_processes()
-    if not processes:
-        print("Processo do Ollama não encontrado")
-        return "", 0, 0, 0
 
-    mem_log = []
-    temp_log = []
+# Main benchmark loop
+results = []
+start_index = 1
+end_index = 5
+filename = get_unique_filename(f"ollama_benchmark_results_{MODEL}", "ndjson")
 
-    monitor_thread = Thread(target=monitor_memory_and_temp, args=(processes, mem_log, temp_log))
-    monitor_thread.daemon = True
-    monitor_thread.start()
+for i in range(start_index - 1, end_index):
+    question = questions[i]
+    text = question["question"]
+    choices = question.get("alternatives", [])
+    description = question.get("description", "")
+    correct_label = question.get("label", "")
 
-    inicio = time.time()
-    try:
-        response = requests.post(OLLAMA_URL, json={
-            "model": MODEL,
-            "prompt": prompt,
-            "stream": False,
-            "verbose": True,
-            "keep_alive": -1
-        }, timeout=300)
-        fim = time.time()
-        tempo = fim - inicio
-        resposta = response.json().get("response", "").strip()
-    except Exception as e:
-        print("Erro ao enviar requisição:", e)
-        resposta = ""
-        tempo = 0
+    prompt = "Multiple choice question incoming.\n"
+    if description:
+        prompt += f"Description to help: {description}\n\n"
+    prompt += f"{text}\n\n" + "\n".join([f"{chr(65 + j)}. {alt}" for j, alt in enumerate(choices)])
+    prompt += "\nRespond with the correct alternative only.\n"
 
-    memoria_max = max(mem_log) if mem_log else 0
-    temp_max = max(temp_log) if temp_log else 0
+    print(f"[{i+1}/{end_index}] Sending question...")
+    answer, elapsed, stats, max_mem, max_temp = ask_ollama_verbose(prompt)
 
-    return resposta, tempo, memoria_max, temp_max
-
-# Execução principal
-resultados = []
-inicio_questao = 173
-num_questoes = 180
-
-for i in range(inicio_questao, num_questoes):
-    questao = questoes[i]
-    texto = questao["question"]
-    alternativas = questao.get("alternatives", [])
-    descricao = questao.get("description", "")
-    correta = questao.get("label", "")
-
-    full_question = "Eu vou te passar uma questão de múltipla escolha.\n"
-    if descricao:
-        full_question += f"A seguinte descrição pode te ajudar: {descricao}\n\n"
-    full_question += f"{texto}\n\n" + "\n".join([f"{chr(65 + i)}. {alt}" for i, alt in enumerate(alternativas)])
-    full_question += "\nResponda somente a alternativa correta\n"
-
-    print(f"[{i+1}/{num_questoes}] Enviando questão...")
-    #resposta, tempo, memoria, temp = perguntar_ollama(full_question)
-    resposta, tempo, stats, memoria, temp = perguntar_ollama_verbose(full_question)
-    
-    resultado = {
-        "index": i+1,
-        "pergunta_modelo": full_question,
-        "resposta_modelo": resposta,
-        "label": correta,
-        "tempo_resposta_s": round(tempo, 2),
-        "memoria_max_MB": round(memoria, 2),
-        "temperatura_max_C": round(temp, 2),
+    result = {
+        "index": i + 1,
+        "model_prompt": prompt,
+        "model_response": answer,
+        "label": correct_label,
+        "response_time_s": round(elapsed, 2),
+        "max_memory_MB": round(max_mem, 2),
+        "max_temperature_C": round(max_temp, 2),
         **stats
     }
-    
-    print(f"Resultado da questão {resultado}:")
 
-    resultados.append(resultado)
+    print(f"Question result: {result}")
+    results.append(result)
 
     with open(filename, "a", encoding="utf-8") as f:
-        json.dump([resultado], f, ensure_ascii=False, indent=2)
-        f.write(",\n")  # evita sobrescrever resultados anteriores e mantém formato válido com cuidado
-    
-    print(f"Arquivo salvo em: {filename}")
+        f.write(json.dumps(result, ensure_ascii=False) + "\n")
 
-print("Fim da execução.")
+    print(f"Saved to: {filename}")
+
+print("Benchmark complete.")
