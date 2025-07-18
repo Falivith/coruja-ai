@@ -4,7 +4,6 @@ import time
 import json
 import psutil
 import subprocess
-import requests
 from threading import Thread
 from datasets import load_dataset
 
@@ -20,6 +19,29 @@ dataset = load_dataset("maritaca-ai/enem", "2024")
 questions = dataset['train']
 
 # Utility functions
+
+# Useful for converting JSON (Enem 2022) to Maritaca modern format
+def convert_to_maritaca_format(questions_detailed):
+    maritaca_formatted = []
+    for i, q in enumerate(questions_detailed):
+        maritaca_formatted.append({
+            "id": f"questao_{i+1:02d}",
+            "exam": q["exam"],
+            "question": f"[[placeholder]]\n{q['question']}",
+            "alternatives": q["options"],
+            "label": q["label"].upper(),  # 'a' → 'A'
+            "figures": q.get("associated_images", []),
+            "description": [q.get("context", "")],
+            "IU": q.get("IU", False),
+            "ledor": False
+        })
+    return maritaca_formatted
+
+with open("data/2022.json", "r", encoding="utf-8") as f:
+    questions_detailed = json.load(f)
+
+enem_2022_questions = convert_to_maritaca_format(questions_detailed)
+
 def remove_ansi(text):
     text = ANSI_ESCAPE.sub('', text)
     return SPINNER_CHARS.sub('', text)
@@ -57,31 +79,33 @@ def monitor_resources(processes, mem_log, temp_log, stop_flag):
             break
 
 def extract_stats(text):
-    pattern = re.compile(r"(total duration:.*?rate:\s*[0-9.]+\s*tokens/s)", re.DOTALL)
+    pattern = re.compile(r"(total duration:.*eval rate:\s*[0-9.]+\s*tokens/s)", re.DOTALL)
     match = pattern.search(text)
     stats = {}
-    clean_text = text
+    clean_text = remove_ansi(text)
 
     if match:
         stats_block = match.group(1).strip()
-        clean_text = text.replace(stats_block, "").strip()
+        clean_text = clean_text.replace(stats_block, "").strip()
 
         patterns = {
-            "total_duration_s": r"total duration:\s+([\d.]+)s",
-            "load_duration_ms": r"load duration:\s+([\d.]+)ms",
-            "prompt_eval_count": r"prompt eval count:\s+(\d+)",
-            "prompt_eval_duration_s": r"prompt eval duration:\s+([\d.]+)s",
-            "prompt_eval_rate": r"prompt eval rate:\s+([\d.]+)",
-            "eval_count": r"eval count:\s+(\d+)",
-            "eval_duration_s": r"eval duration:\s+([\d.]+)s",
-            "eval_rate": r"eval rate:\s+([\d.]+)"
+            "total_duration_s": r"^total duration:\s+([\d.]+)s",
+            "load_duration_ms": r"^load duration:\s+([\d.]+)ms",
+            "prompt_eval_count": r"^prompt eval count:\s+(\d+)",
+            "prompt_eval_duration_s": r"^prompt eval duration:\s+([\d.]+)ms",
+            "prompt_eval_rate": r"^prompt eval rate:\s+([\d.]+)",
+            "eval_count": r"^eval count:\s+(\d+)",
+            "eval_duration_s": r"^eval duration:\s+([\d.]+)s",
+            "eval_rate": r"^eval rate:\s+([\d.]+)"
         }
 
+
         for key, pat in patterns.items():
-            match = re.search(pat, stats_block)
+            match = re.search(pat, stats_block, re.MULTILINE)
             if match:
                 value = match.group(1)
                 stats[key] = float(value) if '.' in value else int(value)
+
 
     return clean_text, stats
 
@@ -146,21 +170,22 @@ def ask_ollama_verbose(prompt, max_retries=1, timeout=360):
 # Main benchmark loop
 results = []
 start_index = 1
-end_index = 5
+end_index = 1
 filename = get_unique_filename(f"ollama_benchmark_results_{MODEL}", "ndjson")
 
 for i in range(start_index - 1, end_index):
-    question = questions[i]
+    #question = questions[i]
+    question = enem_2022_questions[i]  # Use the converted 2022 question format
     text = question["question"]
     choices = question.get("alternatives", [])
     description = question.get("description", "")
     correct_label = question.get("label", "")
 
-    prompt = "Multiple choice question incoming.\n"
+    prompt = "Questão de Múltipla Escolha:\n"
     if description:
-        prompt += f"Description to help: {description}\n\n"
+        prompt += f"Descrição para ajudar: {description}\n\n"
     prompt += f"{text}\n\n" + "\n".join([f"{chr(65 + j)}. {alt}" for j, alt in enumerate(choices)])
-    prompt += "\nRespond with the correct alternative only.\n"
+    prompt += "\nResponda com a alternativa correta.\n"
 
     print(f"[{i+1}/{end_index}] Sending question...")
     answer, elapsed, stats, max_mem, max_temp = ask_ollama_verbose(prompt)
