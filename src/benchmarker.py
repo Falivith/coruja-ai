@@ -10,6 +10,7 @@ from datasets import load_dataset
 # Constants and Regex
 OLLAMA_URL = "http://localhost:11434/api/generate"
 MODEL = "gemma3:1b"
+#MODEL = "gemma3n:e2b"
 OLLAMA_PROCESS_NAME = "ollama"
 ANSI_ESCAPE = re.compile(r'\x1B[@-_][0-?]*[ -/]*[@-~]')
 SPINNER_CHARS = re.compile(r'[⠋⠙⠸⠴⠦⠇⠏⠼⠹⠧]')
@@ -174,8 +175,8 @@ end_index = 180
 filename = get_unique_filename(f"ollama_benchmark_results_{MODEL}", "ndjson")
 
 for i in range(start_index - 1, end_index):
-    #question = questions[i]
-    question = enem_2022_questions[i]  # Use the converted 2022 question format
+    question = questions[i]
+    #question = enem_2022_questions[i]  # Use the converted 2022 question format
     text = question["question"]
     choices = question.get("alternatives", [])
     description = question.get("description", "")
