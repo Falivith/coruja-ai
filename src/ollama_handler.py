@@ -5,7 +5,7 @@ import requests
 app = FastAPI()
 
 OLLAMA_URL = "http://localhost:11434/api/generate"
-MODEL_NAME = "qwen3:4b"
+MODEL_NAME = "gemma3:4b"
 
 class Prompt(BaseModel):
     text: str
@@ -14,7 +14,8 @@ class Prompt(BaseModel):
 
 @app.post("/ask")
 def ask(prompt: Prompt):
-    full_prompt = f"{prompt.pre_prompt.strip()}\n{prompt.text.strip()}".strip()
+    full_prompt = f"[INSTRUÇÃO]\n{prompt.pre_prompt.strip()}\n\n[PERGUNTA]\n{prompt.text.strip()}"
+
 
     payload = {
         "model": MODEL_NAME,
