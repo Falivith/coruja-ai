@@ -16,7 +16,7 @@ ANSI_ESCAPE = re.compile(r'\x1B[@-_][0-?]*[ -/]*[@-~]')
 SPINNER_CHARS = re.compile(r'[⠋⠙⠸⠴⠦⠇⠏⠼⠹⠧]')
 
 # Dataset loading
-dataset = load_dataset("maritaca-ai/enem", "2024")
+dataset = load_dataset("maritaca-ai/enem", "2023")
 questions = dataset['train']
 
 # Utility functions
