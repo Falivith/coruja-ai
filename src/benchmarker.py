@@ -170,7 +170,7 @@ def ask_ollama_verbose(prompt, max_retries=1, timeout=360):
 # Main benchmark loop
 results = []
 start_index = 1
-end_index = 1
+end_index = 180
 filename = get_unique_filename(f"ollama_benchmark_results_{MODEL}", "ndjson")
 
 for i in range(start_index - 1, end_index):
