@@ -9,14 +9,16 @@ from datasets import load_dataset
 
 # Constants and Regex
 OLLAMA_URL = "http://localhost:11434/api/generate"
-MODEL = "gemma3:1b"
+#MODEL = "gemma3:1b"
 #MODEL = "gemma3n:e2b"
+MODEL = "gemma3:4b"
+
 OLLAMA_PROCESS_NAME = "ollama"
 ANSI_ESCAPE = re.compile(r'\x1B[@-_][0-?]*[ -/]*[@-~]')
 SPINNER_CHARS = re.compile(r'[⠋⠙⠸⠴⠦⠇⠏⠼⠹⠧]')
 
 # Dataset loading
-dataset = load_dataset("maritaca-ai/enem", "2023")
+dataset = load_dataset("maritaca-ai/enem", "2022")
 questions = dataset['train']
 
 # Utility functions
@@ -170,7 +172,7 @@ def ask_ollama_verbose(prompt, max_retries=1, timeout=360):
 
 # Main benchmark loop
 results = []
-start_index = 1
+start_index = 157
 end_index = 180
 filename = get_unique_filename(f"ollama_benchmark_results_{MODEL}", "ndjson")
 
