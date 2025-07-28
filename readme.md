@@ -33,8 +33,8 @@ poetry install
 
 # 3. Execute os dois serviços
 source .venv/bin/activate
-sudo env "PATH=$PATH" poetry run python src/main.py 
-poetry run uvicorn src.ollama_handler:app --reload
+sudo env "PATH=$PATH" poetry run python main.py 
+poetry run uvicorn ollama_handler:app --reload
 
 # 4. Testa API Handler Individualmente (ajustar PORT)
 curl -X POST http://localhost:8000/ask \
