@@ -2496,6 +2496,21 @@
   },
   {
     "index": 157,
+    "model_prompt": "Questão de Múltipla Escolha:\nO funcionário de uma loja tem seu salário mensal formado por uma parcela fixa de 675 reais mais uma comissão que depende da quantidade de peças vendidas por ele no mês. O cálculo do valor dessa comissão é feito de acordo com estes critérios:\n• até a quinquagésima peça vendida, paga-se 5 reais por peça;\n• a partir da quinquagésima primeira peça vendida, o valor pago é de 7 reais por peça.\nRepresente por q a quantidade de peças vendidas no mês por esse funcionário, e por S(q) o seu salário mensal, em real, nesse mês.\nA expressão algébrica que descreve S(q) em função de q é\n\nA. S(q) = 675 + (12 x q)\nB. S(q) = 325 + (12 x q)\nC. S(q) = 675 + (7 x q)\nD. S(q) = 625 + (5 x q), se q <= 50, ou S(q) = 925 + (7 x q), se q > 50\nE. S(q) = 625 + (5 x q), se q <= 50, ou S(q) = 575 + (7 x q), se q > 50\nResponda com a alternativa correta.\n",
+    "model_response": "A alternativa correta é a **C. S(q) = 675 + (7 x q)**.\n\n**Explicação:**\n\n*   **S(q)** representa o salário mensal do funcionário.\n*   A comissão é calculada com base na quantidade de peças vendidas (q).\n*   A expressão `(7 x q)` representa o valor da comissão para cada peça vendida acima da quinquagésima primeira.\n*   O salário é composto por uma parcela fixa (675 reais) mais essa comissão, que é determinada pela quantidade de peças vendidas.\n\n**Por que as outras alternativas estão incorretas:**\n\n*   **A:** A expressão não está correta. A comissão varia de acordo com o número de peças vendidas, e não é simplesmente uma multiplicação do salário.\n*   **B:** A comissão não é simplesmente 12 * q; o valor da comissão é diretamente proporcional à quantidade de peças vendidas.\n*   **D:** A expressão não é correta porque a comissão é descontada conforme a quantidade de peças vendidas.\n*   **E:** O problema pede o valor da comissão em relação à quantidade de peças vendidas.",
+    "label": "Anulado",
+    "response_time_s": 34.84,
+    "max_memory_MB": 70.19,
+    "max_temperature_C": 79.3,
+    "total_duration_s": 34.562858726,
+    "prompt_eval_count": 330,
+    "prompt_eval_rate": 28.65,
+    "eval_count": 260,
+    "eval_duration_s": 21.791334231,
+    "eval_rate": 11.93
+  },
+  {
+    "index": 158,
     "model_prompt": "Questão de Múltipla Escolha:\nDescrição para ajudar: ['Ao analisar os dados de uma epidemia em uma cidade, peritos obtiveram um modelo que avalia a quantidade de pessoas infectadas a cada mês, ao longo de um ano. O modelo é dado por p(t) = -t 2 + 10t + 24, sendo t um número natural, variando de 1 a 12, que representa os meses do ano, e p(t) a quantidade de pessoas infectadas no mês t do ano. Para tentar diminuir o número de infectados no próximo ano, a Secretaria Municipal de Saúde decidiu intensificar a propaganda oficial sobre os cuidados com a epidemia. Foram apresentadas cinco propostas (I, II, III, IV e V), com diferentes períodos de intensificação das propagandas: • I: 1 ≤ t ≤ 2; • II: 3 ≤ t ≤ 4; • III: 5 ≤ t ≤ 6; • IV: 7 ≤ t ≤ 9; • V: 10 ≤ t ≤ 12. A sugestão dos peritos é que seja escolhida a proposta cujo período de intensificação da propaganda englobe o mês em que, segundo o modelo, há a maior quantidade de infectados. A sugestão foi aceita. A proposta escolhida foi a']\n\n[[placeholder]]\n\n\nA. I.\nB. II.\nC. III.\nD. IV.\nE. V.\nResponda com a alternativa correta.\n",
     "model_response": "A alternativa correta é **D. IV.**\n\n**Explicação:**\n\nO modelo de p(t) prediz a quantidade de infectados em cada mês. A sugestão dos peritos é que o período de intensificação da propaganda deve ser o que resulta em maior número de infectados.  Analisando os períodos apresentados, o período IV (7 ≤ t ≤ 9) corresponde ao mês em que a quantidade de infectados é maior.",
     "label": "C",
@@ -2511,7 +2526,7 @@
     "eval_rate": 12.42
   },
   {
-    "index": 158,
+    "index": 159,
     "model_prompt": "Questão de Múltipla Escolha:\nDescrição para ajudar: ['Um atleta iniciou seu treinamento visando as competições de fim de ano. Seu treinamento consiste em cinco tipos diferentes de treinos: treino T1, treino T2, treino T3, treino T4 e treino T5. A sequência dos treinamentos deve seguir esta ordem: Dia 1º: T1, 2º: R, 3º: R, 4º: T2, 5º: R, 6º: R, 7º: T3, 8º: R, 9º: T4, 10º: R, 11º: R, 12º: T5, 13º: R. A letra R significa repouso. Após completar a sequência de treinamentos, o atleta começa novamente a sequência a partir do treino T1 e segue a ordem descrita. Após 24 semanas completas de treinamento, se dará o início das competições.']\n\n[[placeholder]]\nA sequência de treinamentos que o atleta realizará na 24ª semana de treinos é\n\nA. T3 R T4 R R T5 R.\nB. R T3 R T4 R R T5.\nC. R T4 R R T5 R T1.\nD. R R T5 R T1 R R.\nE. R T5 R T1 R R T2.\nResponda com a alternativa correta.\n",
     "model_response": "A alternativa correta é **A. T3 R T4 R R T5 R.**\n\n**Justificativa:**\n\nA descrição estabelece que após 24 semanas, o atleta iniciará novamente a sequência de treinamento a partir do treino T1. A sequência de 24 semanas é:\n\n1.  T1\n2.  T2\n3.  T3\n4.  T4\n5.  T5\n6.  T1\n7.  T2\n8.  T3\n9.  T4\n10. T5\n11. T1\n12. T2\n13. T3\n14. T4\n15. T5\n16. T1\n\nA alternativa A corresponde exatamente a essa sequência.",
     "label": "B",
@@ -2527,7 +2542,7 @@
     "eval_rate": 12.34
   },
   {
-    "index": 159,
+    "index": 160,
     "model_prompt": "Questão de Múltipla Escolha:\nDescrição para ajudar: ['O professor de artes orientou seus estudantes a realizarem a seguinte sequência de atividades: • Dobrar uma folha de papel em formato quadrado duas vezes, em sequência, ao longo das linhas tracejadas, conforme ilustrado nas figuras 1 e 2, para obter o papel dobrado, conforme Figura 3. \\uf0de \\uf0de O O Figura 1 Figura 2 Figura 3 • Em seguida, no papel dobrado da Figura 3, considerar o ponto R, sobre o segmento OM, sendo M o ponto médio do lado do quadrado 1 original, de modo que OR = OM, traçar um arco de circunferência 4 1 de raio medindo OM com centro no ponto R, obtendo a Figura 4. 2 Por último, recortar o papel ao longo do arco de circunferência e excluir a parte que contém o setor circular, obtendo o papel dobrado, conforme Figura 5. R O M ⇒ Figura 4 Figura 5 ']\n\n[[placeholder]]\nApós desdobrado o papel que restou na Figura 5, a figura plana que os estudantes obterão será\n\nA. A\nB. B\nC. C\nD. D\nE. E\nResponda com a alternativa correta.\n",
     "model_response": "A alternativa correta é **A. A**.\n\n**Explicação:**\n\nA descrição detalha um processo de criação de um papel dobrado com um desenho específico. O passo final, a \"Figura 5\", mostra o resultado final: um papel dobrado que, ao ser desdobrado, resultará em uma figura plana com um setor circular no centro. A figura plana resultante é, portanto, a mesma que a Figura 5.",
     "label": "C",
@@ -2543,7 +2558,7 @@
     "eval_rate": 12.54
   },
   {
-    "index": 160,
+    "index": 161,
     "model_prompt": "Questão de Múltipla Escolha:\nDescrição para ajudar: ['Uma empresa produz e vende um tipo de chocolate, maciço, em formato de cone circular reto com as medidas do diâmetro da base e da altura iguais a 8 cm e 10 cm, respectivamente, como apresenta a figura. 8 cm 10 cm Devido a um aumento de preço dos ingredientes utilizados na produção desse chocolate, a empresa decide produzir esse mesmo tipo de chocolate com um volume 19% menor, no mesmo formato de cone circular reto com altura de 10 cm.']\n\n[[placeholder]]\nPara isso, a empresa produzirá esses novos chocolates com medida do raio da base, em centímetro, igual a\n\nA. 1,52.\nB. 3,24.\nC. 3,60.\nD. 6,48.\nE. 7,20.\nResponda com a alternativa correta.\n",
     "model_response": "A alternativa correta é **B. 3,24**\n\n**Explicação:**\n\nO volume de um cone é dado pela fórmula: V = (1/3) * π * r², onde r é o raio e V é o volume.\n\n*   **Volume Original:**  No primeiro chocolate, o volume é V1 = π * r1² = π * (8 cm)² = 64π cm³ ≈ 201.06 cm³\n*   **Novo Volume:** O novo volume é V2 = V1 * (1 - 0,19) = 201.06 cm³ * 0.81 = 162.48 cm³\n\nAgora, vamos calcular o raio (r2) desse novo chocolate:\nr2 = √(V2 / π) = √(162.48 / 64π) ≈ 1.52 cm\n\nPortanto, o novo raio é de aproximadamente 1,52 cm.",
     "label": "C",
@@ -2559,7 +2574,7 @@
     "eval_rate": 12.47
   },
   {
-    "index": 161,
+    "index": 162,
     "model_prompt": "Questão de Múltipla Escolha:\nDescrição para ajudar: ['Em janeiro de 2013, foram declaradas 1 794 272 admissões e 1 765 372 desligamentos no Brasil, ou seja, foram criadas 28 900 vagas de emprego, segundo dados do Cadastro Geral de Empregados e Desempregados (Caged), divulgados pelo Ministério do Trabalho e Emprego (MTE). Segundo o Caged, o número de vagas criadas em janeiro de 2013 sofreu uma queda de 75%, quando comparado com o mesmo período de 2012. Disponível em: http://portal.mte.gov.br. Acesso em: 23 fev. 2013 (adaptado).']\n\n[[placeholder]]\nDe acordo com as informações dadas, o número de vagas criadas em janeiro de 2012 foi\n\nA. 16 514.\nB. 86 700.\nC. 115 600.\nD. 441 343.\nE. 448 568.\nResponda com a alternativa correta.\n",
     "model_response": "A alternativa correta é **C. 115 600.**\n\nO texto afirma que o número de vagas criadas em janeiro de 2012 sofreu uma queda de 75% em relação a 2012.",
     "label": "C",
@@ -2575,7 +2590,7 @@
     "eval_rate": 12.58
   },
   {
-    "index": 162,
+    "index": 163,
     "model_prompt": "Questão de Múltipla Escolha:\nDescrição para ajudar: ['Um prédio, com 9 andares e 8 apartamentos de 2 quartos por andar, está com todos os seus apartamentos á venda. Os apartamentos são identificados por números formados por dois algarismos, sendo que a dezena indica o andar onde se encontra o apartamento, e a unidade, um algarismo de 1 a 8, que diferencia os apartamentos de um mesmo andar. Quanto á incidência de sol nos quartos desses apartamentos, constatam-se as seguintes características, em função de seus números de identificação: • n aqueles que finalizam em 1 ou 2, ambos os quartos recebem sol apenas na parte da manhã; • n aqueles que finalizam em 3, 4, 5 ou 6, apenas um dos quartos recebe sol na parte da manhã; • n aqueles que finalizam em 7 ou 8, ambos os quartos recebem sol apenas na parte da tarde. Uma pessoa pretende comprar 2 desses apartamentos em um mesmo andar, mas quer que, em ambos, pelo menos um dos quartos receba sol na parte da manhã. De quantas maneiras diferentes essa pessoa poderá escolher 2 desses apartamentos para compra nas condições desejadas? 6!']\n\n[[placeholder]]\n\n\nA. 9 x (6! / (6 - 2)!)\nB. 9 x (6! / ((6 - 2)! x 2!))\nC. 9 x (4! / ((4 - 2)! x 2!))\nD. 9 x (2! / ((2 - 2)! x 2!))\nE. 9 x ((8! / ((8 - 2)! x 2!)) - 1)\nResponda com a alternativa correta.\n",
     "model_response": "A alternativa correta é **B. 9 x (6! / ((6 - 2)! x 2!))**\n\n**Explicação:**\n\n1. **Número de combinações possíveis:**  O problema pede para a pessoa escolher 2 apartamentos de um andar.  O número total de combinações possíveis é  `nCr = n! / (r! * (n-r)!)`, onde 'n' é o número total de apartamentos e 'r' é o número de apartamentos escolhidos.  Nesse caso, n = 9 e r = 2.  Portanto, o número de combinações é: `9C2 = 9! / (2! * 7!) = 9 * 8 = 72`.\n\n2. **Condições da pessoa:** A pessoa quer que, em ambos os apartamentos, pelo menos um dos quartos receba sol na parte da manhã.  Isso significa que o número de quartos que recebem sol na parte da manhã deve ser no mínimo 2.\n\n3. **Cálculo da incidência de sol:** Para determinar o número de combinações que atendem a essa condição, precisamos contar os casos em que pelo menos um quarto recebe sol na parte da manhã:\n   - **Casos sem sol na parte da manhã:**  Há duas possibilidades:  (1) O primeiro quarto não recebe sol e o segundo recebe sol.  Isso dá 1 combinação.\n   - **Casos com um quarto sem sol na parte da manhã:**  Há 7 casos possíveis (os dois quartos são diferentes).  Portanto, temos 7 combinações.\n   - **Total de combinações que não atendem a condição:** 1 + 7 = 8.\n   - **Casos que atendem a condição:** Total de combinações - 8 = 72 - 8 = 64.\n\n4. **Calculando o número de combinações que atendem à condição:**\n   - O número de combinações que satisfazem a condição é o total de combinações menos as combinações que não atendem à condição.  Portanto, o número de combinações é: 72 - 8 = 64.\n\n**Por que as outras alternativas estão erradas:**\n\n* **A:** A alternativa não considera as restrições do problema.  A incidência de sol *não* é apenas uma questão de escolher os apartamentos, mas também de garantir que pelo menos um quarto receba sol na parte da manhã.\n* **C:** A alternativa não considera a condição específica sobre o número de quartos com sol na parte da manhã.\n* **D:** A alternativa não leva em conta a necessidade de 2 apartamentos para a compra.\n\n**Em resumo, a fórmula 9C2 (com as 8 restrições)  representa o número de maneiras diferentes que a pessoa pode escolher 2 apartamentos para comprar, onde a condição de pelo menos um quarto recebe sol na parte da manhã é atendida.**",
     "label": "B",
@@ -2590,7 +2605,7 @@
     "eval_rate": 12.16
   },
   {
-    "index": 163,
+    "index": 164,
     "model_prompt": "Questão de Múltipla Escolha:\nDescrição para ajudar: ['Um médico faz o acompanhamento clínico de um grupo de pessoas que realizam atividades físicas diariamente. Ele observou que a perda média de massa dessas pessoas para cada hora de atividade física era de 1,5 kg. Sabendo que a massa de 1 L de água é de 1 kg, ele recomendou que ingerissem, ao longo das 3 horas seguintes ao final da atividade, uma quantidade total de água correspondente a 40% a mais do que a massa perdida na atividade física, para evitar desidratação. Seguindo a recomendação médica, uma dessas pessoas ingeriu, certo dia, um total de 1,7 L de água após terminar seus exercícios físicos. Para que a recomendação médica tenha efetivamente sido respeitada, a atividade física dessa pessoa, nesse dia, durou']\n\n[[placeholder]]\n\n\nA. 30 minutos ou menos.\nB. mais de 35 e menos de 45 minutos.\nC. mais de 45 e menos de 55 minutos.\nD. mais de 60 e menos de 70 minutos.\nE. 70 minutos ou mais.\nResponda com a alternativa correta.\n",
     "model_response": "A alternativa correta é **A. 30 minutos ou menos.**\n\n**Explicação:**\n\nA descrição enfatiza que a perda de massa é de 1,5 kg por hora. A recomendação de 40% a mais do que a perda é fundamental para evitar a desidratação. Se a pessoa ingeriu 1,7 L, o excesso de 0,4 L (40% a mais) corresponde à perda de massa, conforme o requisito da recomendação médica.",
     "label": "C",
@@ -2606,7 +2621,7 @@
     "eval_rate": 12.48
   },
   {
-    "index": 164,
+    "index": 165,
     "model_prompt": "Questão de Múltipla Escolha:\nDescrição para ajudar: ['Em uma sala de cinema, para garantir que os espectadores vejam toda a imagem projetada na tela, a disposição das poltronas deve obedecer á norma técnica da Associação Brasileira de Normas Técnicas (ABNT), que faz as seguintes indicações: • D istância mínima (D ) entre a tela de projeção e o encosto da mín poltrona da primeira fileira deve ser de, pelo menos, 60% da largura (L) da tela. • D istância máxima (D ) entre a tela de projeção e o encosto da máx poltrona da última fileira deve ser o dobro da largura (L) da tela, sendo aceitável uma distância de até 2,9 vezes a largura (L) da tela. Para o espaçamento entre as fileiras de poltronas, é considerada a distância de 1 metro entre os encostos de poltronas em duas fileiras consecutivas. Disponível em: www.ctav.gov.br. Acesso em: 14 nov. 2013. Uma sala de cinema, cuja largura da tela mede 12 m, está montada em conformidade com as normas da ABNT e tem suas dimensões especificadas na figura. Área de instalação de novas poltronas m Fileira 1 D = 2,9L aceitável Fileira m D = 2L máx 1 D = 0,6L mín Tela Fileira L Pretende-se ampliar essa sala, mantendo-se na mesma posição a tela e todas as poltronas já instaladas, ampliando-se ao máximo a sala para os fundos (área de instalação de novas poltronas), respeitando-se o limite aceitável da norma da ABNT. A intenção é aumentar, ao máximo, a quantidade de poltronas da sala, instalando-se novas unidades, iguais ás já instaladas.']\n\n[[placeholder]]\nQuantas fileiras de poltronas a sala comportará após essa ampliação?\n\nA. 26\nB. 27\nC. 28\nD. 29\nE. 35\nResponda com a alternativa correta.\n",
     "model_response": "A alternativa correta é **C. 28**.\n\n**Explicação:**\n\n*   **Largura da tela:** 12m\n*   **Norma ABNT:** Distância mínima entre tela e encosto (primeira fileira) = 60% da largura da tela.\n*   **Norma ABNT:** Distância máxima entre tela e encosto (última fileira) = 2,9 vezes a largura da tela.\n*   **Distância entre fileiras:** 1 metro.\n\n**Cálculo:**\n\n1.  **Primeira fileira:** 60% de 12m = 0,6 * 12m = 7,2m.  A largura total da primeira fileira é 7,2m.\n2.  **Última fileira:** 2,9 * 12m = 34,4m.  A largura total da última fileira é 34,4m.\n3.  **Número de fileiras:**  A largura da tela é a soma das dimensões de cada fileira.  Portanto, a sala terá 2 fileiras de poltronas.\n\nSe a sala já tiver 26 fileiras, a ampliação aumentará a quantidade de fileiras de poltronas para 28.",
     "label": "C",
@@ -2622,7 +2637,7 @@
     "eval_rate": 12.25
   },
   {
-    "index": 165,
+    "index": 166,
     "model_prompt": "Questão de Múltipla Escolha:\nDescrição para ajudar: ['A luminosidade L de uma estrela está relacionada com o raio R e com a temperatura T dessa estrela segundo a Lei de Stefan-Boltzmann: L = c ⋅ R^2 ⋅ T^4, em que c é uma constante igual para todas as estrelas. Disponível em: http://ciencia.hsw.uol.com.br. Acesso em: 22 nov. 2013 (adaptado).']\n\n[[placeholder]]\nConsidere duas estrelas E e F, sendo que a estrela E tem metade do raio da estrela F e o dobro da temperatura de F. Indique por Le e Lf suas respectivas luminosidades. A relação entre as luminosidades dessas duas estrelas é dada por\n\nA. Le = Lf / 2\nB. Le = Lf / 4\nC. Le = Lf\nD. Le = 4 ⋅ Lf\nE. Le = 8 ⋅ Lf\nResponda com a alternativa correta.\n",
     "model_response": "A alternativa correta é **C. Le = Lf**\n\n**Explicação:**\n\nA descrição estabelece que a luminosidade (L) de uma estrela é proporcional ao quadrado do seu raio (R) e à quarta potência da sua temperatura (T): L = c ⋅ R^2 ⋅ T^4.\n\n*   **E:** A estrela E tem metade do raio da estrela F, o que significa que seu raio é 1/2 * R.\n*   **2:** A estrela E tem o dobro da temperatura de F, o que significa que sua temperatura é 2 * T.\n\nPortanto, L = c * (1/2 * R)^2 * (2 * T)^4 = c * (1/4 * R^2) * (16 * T^4) = c * R^2 * T^4.\n\nComo a luminosidade é diretamente proporcional ao quadrado do raio e à quarta potência da temperatura, podemos concluir que:\n\n**L = c ⋅ R^2 ⋅ T^4**\n\nEssa é a equação que descreve a relação entre as luminosidades das estrelas em questão.",
     "label": "D",
@@ -2638,7 +2653,7 @@
     "eval_rate": 12.4
   },
   {
-    "index": 166,
+    "index": 167,
     "model_prompt": "Questão de Múltipla Escolha:\nDescrição para ajudar: ['Uma das informações que pode auxiliar no dimensionamento do número de pediatras que devem atender em uma Unidade Básica de Saúde (UBS) é o número que representa a mediana da quantidade de crianças por família existente na região sob sua responsabilidade. O quadro mostra a distribuição das frequências do número de crianças por família na região de responsabilidade de uma UBS. Número de crianças por família Frequência 0 100 1 400 2 200 3 150 4 100 5 50 ']\n\n[[placeholder]]\nO número que representa a mediana da quantidade de crianças por família nessa região é\n\nA. 1,0.\nB. 1,5.\nC. 1,9.\nD. 2,1.\nE. 2,5.\nResponda com a alternativa correta.\n",
     "model_response": "A alternativa correta é **B. 1,5.**\n\n**Justificativa:**\n\nA mediana é o valor que divide a distribuição em duas partes iguais. No gráfico, a mediana representa o número de crianças por família que está em torno de 150, que é o valor que divide a região em duas metades.",
     "label": "B",
@@ -2654,7 +2669,7 @@
     "eval_rate": 12.56
   },
   {
-    "index": 167,
+    "index": 168,
     "model_prompt": "Questão de Múltipla Escolha:\nDescrição para ajudar: ['Em jogos de voleibol, um saque é invalidado se a bola atingir o teto do ginásio onde ocorre o jogo. Um jogador de uma equipe tem um saque que atinge uma grande altura. Seu recorde foi quando a batida do saque se iniciou a uma altura de 1,5 m do piso da quadra, x2 7x e a trajetória da bola foi descrita pela parábola y � � � �12, em 6 3 que y representa a altura da bola em relação ao eixo x (das abscissas) que está localizado a 1,5 m do piso da quadra, como representado na figura. Suponha que em todas as partidas algum saque desse jogador atinja a mesma altura do seu recorde. y 1,5 m 1,5 m 1,5 m x A equipe desse jogador participou de um torneio de voleibol no qual jogou cinco partidas, cada uma delas em um ginásio diferente. As alturas dos tetos desses ginásios, em relação aos pisos das quadras, são: • ginásio I: 17 m; • ginásio II: 18 m; • ginásio III: 19 m; • ginásio IV: 21 m; • ginásio V: 40 m. ']\n\n[[placeholder]]\nO saque desse atleta foi invalidado\n\nA. apenas no ginásio I.\nB. apenas nos ginásios I e II.\nC. apenas nos ginásios I, II e III.\nD. apenas nos ginásios I, II, III e IV.\nE. em todos os ginásios.\nResponda com a alternativa correta.\n",
     "model_response": "A alternativa correta é **A. apenas no ginásio I.**\n\n**Explicação:**\n\nA descrição do parábola da trajetória da bola indica que o saque do atleta atingiu o teto do ginásio I. Apenas o ginásio I resultou em um recorde de altura de 1,5 m. Portanto, o saque foi invalidado apenas nesse ginásio.",
     "label": "D",
@@ -2670,7 +2685,7 @@
     "eval_rate": 12.49
   },
   {
-    "index": 168,
+    "index": 169,
     "model_prompt": "Questão de Múltipla Escolha:\nDescrição para ajudar: ['O pacote básico de um jogo para smartphone, que é vendido a R$ 50,00, contém 2 000 gemas e 100 000 moedas de ouro, que são itens utilizáveis nesse jogo. A empresa que comercializa esse jogo decidiu criar um pacote especial que será vendido a R$ 100,00 e que se diferenciará do pacote básico por apresentar maiores quantidades de gemas e moedas de ouro. Para estimular as vendas desse novo pacote, a empresa decidiu inserir nele 6 000 gemas a mais, em relação ao que o cliente teria caso optasse por comprar, com a mesma quantia, dois pacotes básicos.']\n\n[[placeholder]]\nA quantidade de moedas de ouro que a empresa deverá inserir ao pacote especial, para que seja mantida a mesma proporção existente entre as quantidades de gemas e de moedas de ouro contidas no pacote básico, é\n\nA. 50 000.\nB. 100 000.\nC. 200 000.\nD. 300 000.\nE. 400 000.\nResponda com a alternativa correta.\n",
     "model_response": "A alternativa correta é **B. 100 000**\n\n**Explicação:**\n\n1. **Proporção Inicial:** O pacote básico tem 2.000 gemas e 100.000 moedas de ouro.\n2. **Aumento:** O pacote especial tem 6.000 gemas a mais.\n3. **Cálculo:** Para manter a mesma proporção com o pacote básico, o aumento das gemas deve ser igual ao aumento das moedas de ouro.\n   * Aumento das gemas: 6.000\n   * Aumento das moedas de ouro: 100.000\n   * 6.000 = 100.000 / 6  =>  6 = 16.666...  (Não é um número inteiro, então precisamos de mais lógica)\n4. **Lógica da Proporção:** A proporção original é de 2 gemas para 100 moedas.  Se multiplicarmos o número de moedas pela proporção original, encontramos que  100 moedas * 2 gemas = 200 gemas.\n5. **Ajuste:** O pacote especial terá 200 gemas + 6.000 gemas = 2600 gemas.\n6. **Moedas de Ouro:** Para manter a mesma proporção com o pacote básico, o número de moedas de ouro deve ser 200 moedas / 2600 gemas = 0,077 moedas de ouro por gemá.\n7. **Conclusão:**  Precisamos de 100.000 moedas de ouro para manter a mesma proporção. Se o pacote especial tem 2600 gemas, então a empresa deve inserir 100.000 / 2600 = 38,88 moedas de ouro (aproximadamente). Como 38,88  não é uma opção, devemos usar o valor mais próximo, que é 39 moedas de ouro.\n\nNo entanto, a questão é que o valor 100.000 é o que precisa ser **inserido** para manter a proporção.  Portanto, a alternativa mais direta é que o pacote especial precisa ter **100.000 moedas de ouro**.",
     "label": "E",
@@ -2686,7 +2701,7 @@
     "eval_rate": 12.27
   },
   {
-    "index": 169,
+    "index": 170,
     "model_prompt": "Questão de Múltipla Escolha:\nDescrição para ajudar: ['Um parque tem dois circuitos de tamanhos diferentes para corridas. Um corredor treina nesse parque e, no primeiro dia, inicia seu treino percorrendo 3 voltas em torno do circuito maior e 2 voltas em torno do menor, perfazendo um total de 1 800 m. Em seguida, dando continuidade a seu treino, corre mais 2 voltas em torno do circuito maior e 1 volta em torno do menor, percorrendo mais 1 100 m. No segundo dia, ele pretende percorrer 5 000 m nos circuitos do parque, fazendo um número inteiro de voltas em torno deles e de modo que o número de voltas seja o maior possível.']\n\n[[placeholder]]\nA soma do número de voltas em torno dos dois circuitos, no segundo dia, será\n\nA. 10.\nB. 13.\nC. 14.\nD. 15.\nE. 16.\nResponda com a alternativa correta.\n",
     "model_response": "Vamos resolver o problema passo a passo:\n\n1. **Troca de voltas:** No primeiro dia, o corredor percorre 3 voltas no maior e 2 no menor, totalizando 5 voltas. Em seguida, corre 2 voltas no maior e 1 no menor, totalizando 3 voltas.\n2. **Número total de voltas no primeiro dia:** 5 + 3 = 8 voltas\n3. **Número total de voltas no segundo dia:** 5000 m / 3 voltas = 1666,67 voltas (aproximadamente). Como o número de voltas deve ser um número inteiro, vamos considerar que o número total de voltas é 1666.\n4. **Total de voltas em torno de todos os circuitos:**  8 + 1666 = 1674 voltas.\n\nAgora, vamos calcular a soma de todas as voltas em torno dos dois circuitos:\n*   Circuito maior: 2 voltas\n*   Circuito menor: 3 voltas\n*   Total: 2 + 3 = 5 voltas\n\nA soma de todas as voltas em torno de ambos os circuitos é 1800 m + 1100 m = 2900 m.\n\nAgora, vamos adicionar a voltagem no segundo dia:\n*   Tamanho total do parque: 2900 m\n\nPara encontrar o número inteiro de voltas em torno de todos os circuitos, o número de voltas em torno de cada circuito deve ser o maior possível, ou seja, 2900 / 2 = 1450 voltas.\n\nSoma de voltas em circuitos: 1450 voltas\n\nA soma de voltas em torno de todos os circuitos no segundo dia seria:\n1450 voltas.\n\nA soma do número de voltas em torno dos dois circuitos, no segundo dia, será:\nTotal de voltas em circuitos: 1450\nA soma de voltas em torno dos dois circuitos no segundo dia: 1450\n\nA soma de voltas em torno de todos os circuitos: 1800 + 1100 = 2900\n\nResposta: A. 10.\n\n**Portanto, a alternativa correta é A. 10.**",
     "label": "E",
@@ -2702,7 +2717,7 @@
     "eval_rate": 12.28
   },
   {
-    "index": 170,
+    "index": 171,
     "model_prompt": "Questão de Múltipla Escolha:\nDescrição para ajudar: ['Uma equipe de marketing digital foi contratada para aumentar as vendas de um produto ofertado em um site de comércio eletrônico. Para isso, elaborou um anúncio que, quando o cliente clica sobre ele, é direcionado para a página de vendas do produto. Esse anúncio foi divulgado em duas redes sociais, A e B, e foram obtidos os seguintes resultados: • rede social A: o anúncio foi visualizado por 3 000 pessoas; 10% delas clicaram sobre o anúncio e foram redirecionadas para o site; 3% das que clicaram sobre o anúncio compraram o produto. O investimento feito para a publicação do anúncio nessa rede foi de R$ 100,00; • rede social B: o anúncio foi visualizado por 1 000 pessoas; 30% delas clicaram sobre o anúncio e foram redirecionadas para o site; 2% das que clicaram sobre o anúncio compraram o produto. O investimento feito para a publicação do anúncio nessa rede foi de R$ 200,00. Por experiência, o pessoal da equipe de marketing considera que a quantidade de novas pessoas que verão o anúncio é diretamente proporcional ao investimento realizado, e que a quantidade de pessoas que comprarão o produto também se manterá proporcional á quantidade de pessoas que clicarão sobre o anúncio. O responsável pelo produto decidiu, então, investir mais R$ 300,00 em cada uma das duas redes sociais para a divulgação desse anúncio e obteve, de fato, o aumento proporcional esperado na quantidade de clientes que compraram esse produto. Para classificar o aumento obtido na quantidade (Q) de compradores desse produto, em consequência dessa segunda divulgação, em relação aos resultados observados na primeira divulgação, o responsável pelo produto adotou o seguinte critério: • Q ≤ 60%: não satisfatório; • 60% < Q ≤ 100%: regular; • 100% < Q ≤ 150%: bom; • 150% < Q ≤ 190%: muito bom; • 190% < Q ≤ 200%: excelente.']\n\n[[placeholder]]\nO aumento na quantidade de compradores, em consequência dessa segunda divulgação, em relação ao que foi registrado com a primeira divulgação, foi classificado como\n\nA. não satisfatório.\nB. regular.\nC. bom.\nD. muito bom.\nE. excelente.\nResponda com a alternativa correta.\n",
     "model_response": "A alternativa correta é **C. bom.**\n\n**Explicação:**\n\nO enunciado do problema afirma que o responsável pelo produto decidiu investir mais R$ 300,00 em cada rede social.  Como a segunda divulgação, com o investimento adicional, resultou em um aumento proporcionalmente maior na quantidade de clientes que compraram o produto, o aumento é considerado \"bom\".",
     "label": "C",
@@ -2718,7 +2733,7 @@
     "eval_rate": 12.31
   },
   {
-    "index": 171,
+    "index": 172,
     "model_prompt": "Questão de Múltipla Escolha:\nDescrição para ajudar: ['Uma montadora de automóveis divulgou que oferta a seus clientes mais de 1 000 configurações diferentes de carro, variando o modelo, a motorização, os opcionais e a cor do veículo. Atualmente, ela oferece 7 modelos de carros com 2 tipos de motores: 1.0 e 1.6. Já em relação aos opcionais, existem 3 escolhas possíveis: central multimídia, rodas de liga leve e bancos de couro, podendo o cliente optar por incluir um, dois, três ou nenhum dos opcionais disponíveis.']\n\n[[placeholder]]\nPara ser fiel á divulgação feita, a quantidade mínima de cores que a montadora deverá disponibilizar a seus clientes é\n\nA. 8.\nB. 9.\nC. 11.\nD. 18.\nE. 24.\nResponda com a alternativa correta.\n",
     "model_response": "A resposta correta é **C. 11.**\n\n**Justificativa:**\n\nA descrição indica que a montadora oferece 7 modelos de carros com 2 tipos de motores (1.0 e 1.6) e 3 opções de opcionais (multimídia, rodas e bancos).  Para que a empresa possa atender a uma ampla gama de clientes e oferecer opções de personalização, ela deve disponibilizar pelo menos 11 cores diferentes de veículos.",
     "label": "B",
@@ -2734,7 +2749,7 @@
     "eval_rate": 12.52
   },
   {
-    "index": 172,
+    "index": 173,
     "model_prompt": "Questão de Múltipla Escolha:\nDescrição para ajudar: ['Dentre as diversas planificações possíveis para o cubo, uma delas é a que se encontra apresentada na Figura 1. Figura 1 Em um cubo, foram pintados, em três de suas faces, quadrados de cor cinza escura, que ocupam um quarto dessas faces, tendo esses três quadrados um vértice em comum, conforme ilustrado na Figura 2. Figura 2 ']\n\n[[placeholder]]\nA planificação do cubo da Figura 2, conforme o tipo de planificação apresentada na Figura 1, é A D B E C\n\n\nResponda com a alternativa correta.\n",
     "model_response": "A alternativa correta é **A D B E C**.\n\nO texto descreve a planificação do cubo na Figura 2, e a alternativa A-D-B-E-C corresponde à descrição da Figura 2.",
     "label": "D",
@@ -2750,7 +2765,7 @@
     "eval_rate": 12.74
   },
   {
-    "index": 173,
+    "index": 174,
     "model_prompt": "Questão de Múltipla Escolha:\nDescrição para ajudar: ['Cada número que identifica uma agência bancária tem quatro dígitos: N1, N2, N3, N4 mais um dígito verificador N5. Todos esses dígitos são números naturais pertencentes ao conjunto {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}. Para a determinação de N5, primeiramente multiplica-se ordenadamente os quatro primeiros dígitos do número da agência por 5, 4, 3 e 2, respectivamente, somam-se os resultados e obtém-se S = 5 N1 + 4 N2 + 3 N3 + 2 N4. Posteriormente, encontra-se o resto da divisão de S por 11, denotando por R esse resto. Dessa forma, N5 é a diferença 11 - R. 5 Considere o número de uma agência bancária cujos quatro primeiros dígitos são 0100.']\n\n[[placeholder]]\nQual é o dígito verificador N5 dessa agência bancária?\n\nA. 0\nB. 6\nC. 7\nD. 8\nE. 9\nResponda com a alternativa correta.\n",
     "model_response": "Vamos resolver o problema passo a passo:\n\n1. **Multiplicação:**\n   5 * 1 * 0 * 0 = 0\n   4 * 1 * 0 * 0 = 0\n   3 * 1 * 0 * 0 = 0\n   2 * 1 * 0 * 0 = 0\n   Portanto, S = 0 + 0 + 0 + 0 = 0\n\n2. **Divisão por 11:**\n   0 / 11 = 0  (resto 0)\n\n3. **N5:**\n   R = 11 - 0 = 11\n\n4. **N5:**\n   N5 = 11\n\nPortanto, o dígito verificador N5 é 11.\n\n**A alternativa correta é D. 8**",
     "label": "C",
@@ -2766,7 +2781,7 @@
     "eval_rate": 12.37
   },
   {
-    "index": 174,
+    "index": 175,
     "model_prompt": "Questão de Múltipla Escolha:\nDescrição para ajudar: ['Um casal está reformando a cozinha de casa e decidiu comprar um refrigerador novo. Observando a planta da nova cozinha, desenhada na escala de 1 : 50, notaram que o espaço destinado ao refrigerador tinha 3,8 cm de altura e 1,6 cm de largura. Eles sabem que os fabricantes de refrigeradores indicam que, para um bom funcionamento e fácil manejo na limpeza, esses eletrodomésticos devem ser colocados em espaços que permitam uma distância de, pelo menos, 10 cm de outros móveis ou paredes, tanto na parte superior quanto nas laterais. O casal comprou um refrigerador que caberia no local a ele destinado na nova cozinha, seguindo as instruções do fabricante.']\n\n[[placeholder]]\nEsse refrigerador tem altura e largura máximas, em metro, respectivamente, iguais a\n\nA. 1,80 e 0,60.\nB. 1,80 e 0,70.\nC. 1,90 e 0,80.\nD. 2,00 e 0,90.\nE. 2,00 e 1,00.\nResponda com a alternativa correta.\n",
     "model_response": "A alternativa correta é **C. 1,90 e 0,80.**\n\n**Explicação:**\n\nA planta da cozinha, desenhada em escala de 1:50, indica que o espaço dedicado ao refrigerador tem 3,8 cm de altura e 1,6 cm de largura.  Os fabricantes recomendam uma distância mínima de 10 cm entre o refrigerador e outros móveis ou paredes.  Portanto, para garantir o bom funcionamento e limpeza, o refrigerador deve ser colocado a uma distância de 10 cm de cada um desses elementos.  A altura e a largura máximas do refrigerador, conforme a planta, são 1,90 cm e 0,80 cm, respectivamente.",
     "label": "A",
@@ -2782,7 +2797,7 @@
     "eval_rate": 12.44
   },
   {
-    "index": 175,
+    "index": 176,
     "model_prompt": "Questão de Múltipla Escolha:\nDescrição para ajudar: ['Foram convidadas 32 equipes para um torneio de futebol, que foram divididas em 8 grupos com 4 equipes, sendo que, dentro de um grupo, cada equipe disputa uma única partida contra cada uma das demais equipes de seu grupo. A primeira e a segunda colocadas de cada grupo seguem para realizar as 8 partidas da próxima fase do torneio, chamada oitavas de final. Os vencedores das partidas das oitavas de final seguem para jogar as 4 partidas das quartas de final. Os vencedores das quartas de final disputam as 2 partidas das semifinais, e os vencedores avançam para a grande final, que define a campeã do torneio. Pelas regras do torneio, cada equipe deve ter um período de descanso de, no mínimo, 3 dias entre dois jogos por ela disputados, ou seja, se um time disputar uma partida, por exemplo, num domingo, só poderá disputar a partida seguinte a partir da quinta-feira da mesma semana.']\n\n[[placeholder]]\nO número mínimo de dias necessários para a realização desse torneio é\n\nA. 22.\nB. 25.\nC. 28.\nD. 48.\nE. 64.\nResponda com a alternativa correta.\n",
     "model_response": "A alternativa correta é **C. 28.**\n\n**Explicação:**\n\n1.  **Grupos:** 32 equipes -> 8 grupos, cada grupo com 4 equipes.\n2.  **Partidas por grupo:** Cada grupo disputa 4 partidas.\n3.  **Oitavas de final:** Vencedores de cada grupo se qualificam para as oitavas de final.\n4.  **Quartas de final:** Vencedores das oitavas de final se qualificam para as quartas de final.\n5.  **Semifinais:** Vencedores das quartas de final se enfrentam em uma partida de semifinal.\n6.  **Grande final:** Vencedor da semifinal compete pela campeã.\n\nO tempo de descanso mínimo entre jogos é crucial para garantir que as equipes tenham tempo suficiente para se recuperar e se preparar para os próximos jogos.  Como cada equipe tem 3 dias de descanso, o torneio precisa de pelo menos 28 dias para cumprir essa exigência.",
     "label": "B",
@@ -2798,7 +2813,7 @@
     "eval_rate": 12.32
   },
   {
-    "index": 176,
+    "index": 177,
     "model_prompt": "Questão de Múltipla Escolha:\nDescrição para ajudar: ['Em um jogo de bingo, as cartelas contêm 16 quadrículas dispostas em linhas e colunas. Cada quadrícula tem impresso um número, dentre os inteiros de 1 a 50, sem repetição de número. Na primeira rodada, um número é sorteado, aleatoriamente, dentre os 50 possíveis. Em todas as rodadas, o número sorteado é descartado e não participa dos sorteios das rodadas seguintes. Caso o jogador tenha em sua cartela o número sorteado, ele o assinala na cartela. Ganha o jogador que primeiro conseguir preencher quatro quadrículas que formam uma linha, uma coluna ou uma diagonal, conforme os tipos de situações ilustradas na Figura 1. Preenchimento em linha Preenchimento em coluna Preenchimento em diagonal Figura 1 O jogo inicia e, nas quatro primeiras rodadas, foram sorteados os seguintes números: 03, 27, 07 e 48. Ao final da quarta rodada, somente Pedro possuía uma cartela que continha esses quatro números sorteados, sendo que todos os demais jogadores conseguiram assinalar, no máximo, um desses números em suas cartelas. Observe na Figura 2 o cartão de Pedro após as quatro primeiras rodadas. 03 48 12 27 49 11 22 05 29 50 19 45 33 23 38 07 Figura 2 A probabilidade de Pedro ganhar o jogo em uma das duas próximas rodadas é 1 1 1 43 A + D � 46 46�45 46 45 1 2 1 49 � � B E 46 46�45 46 46�45 1 8 � C 46 46�45']\n\n[[placeholder]]\n\n\n\nResponda com a alternativa correta.\n",
     "model_response": "A alternativa correta é **C**.\n\n**Explicação:**\n\nA análise do cenário ilustrado na Figura 2 mostra que Pedro é o único que conseguiu preencher quatro quadrículas em uma rodada, enquanto os outros jogadores não conseguiram. Isso significa que, na próxima rodada, a probabilidade de Pedro ganhar o jogo é de 1 em 8.",
     "label": "E",
@@ -2814,7 +2829,7 @@
     "eval_rate": 12.42
   },
   {
-    "index": 177,
+    "index": 178,
     "model_prompt": "Questão de Múltipla Escolha:\nDescrição para ajudar: ['Uma máquina em operação tem sua temperatura T monitorada por meio de um registro gráfico, ao longo do tempo t. Essa máquina possui um pistão cuja velocidade V varia com a temperatura T da máquina, de acordo com a expressão V = T 2 - 4. Após a máquina funcionar durante o intervalo de tempo de 10 horas, o seu operador analisa o registro gráfico, apresentado na figura, para avaliar a necessidade de eventuais ajustes, sabendo que a máquina apresenta falhas de funcionamento quando a velocidade do pistão se anula. T (ºC) 4 2 0 t (h) 10 −2 Quantas vezes a velocidade do pistão se anulou durante as 10 horas de funcionamento?']\n\n[[placeholder]]\n\n\nA. 1\nB. 2\nC. 3\nD. 4\nE. 5\nResponda com a alternativa correta.\n",
     "model_response": "A alternativa correta é **C. 3**.\n\n**Explicação:**\n\n*   **V = T² - 4:**  Esta é a equação da velocidade do pistão.  A equação é a chave para determinar quantas vezes o pistão se anulou.\n*   **Intervalo de tempo:** O operador analisou o registro gráfico por 10 horas.\n*   **Análise:**  A velocidade do pistão se anula quando V = 0.  Portanto, o pistão se anula 3 vezes durante o período de 10 horas.",
     "label": "E",
@@ -2830,7 +2845,7 @@
     "eval_rate": 12.52
   },
   {
-    "index": 178,
+    "index": 179,
     "model_prompt": "Questão de Múltipla Escolha:\nDescrição para ajudar: ['A World Series é a decisão do campeonato norte-americano de beisebol. Os dois times que chegam a essa fase jogam, entre si, até sete partidas. O primeiro desses times que completar quatro vitórias é declarado campeão. Considere que, em todas as partidas, a probabilidade de qualquer um dos dois times vencer é sempre 1/2.']\n\n[[placeholder]]\nQual é a probabilidade de o time campeão ser aquele que venceu a primeira partida da World Series?\n\nA. 35/64\nB. 40/64\nC. 42/64\nD. 44/64\nE. 52/64\nResponda com a alternativa correta.\n",
     "model_response": "A resposta correta é **C. 42/64**\n\n**Explicação:**\n\nA questão descreve um cenário onde a chance de um time vencer uma partida é sempre 1/2.  Para que o time campeão seja o que venceu a primeira partida, ele precisa vencer *todas* as partidas subsequentes.\n\n*   **Primeira partida:** A probabilidade de ele vencer a primeira partida é 1/2.\n*   **Segunda partida:** A probabilidade de ele vencer a segunda partida é 1/2.\n*   **Terceira partida:** A probabilidade de ele vencer a terceira partida é 1/2.\n*   ...\n*   **Sete partidas:** A probabilidade de ele vencer todas as partidas subsequentes é 1/2.\n\nComo a probabilidade de um time vencer uma partida é sempre 1/2, a probabilidade de ele vencer *todas* as partidas é 1/2 elevado a 7 (que é 2^7).",
     "label": "C",
@@ -2846,7 +2861,7 @@
     "eval_rate": 12.45
   },
   {
-    "index": 179,
+    "index": 180,
     "model_prompt": "Questão de Múltipla Escolha:\nDescrição para ajudar: ['O gráfico apresenta os totais de receitas e despesas de uma empresa, expressos em milhão de reais, no decorrer dos meses de um determinado ano. A empresa obtém lucro quando a diferença entre receita e despesa é positiva e tem prejuízo quando essa diferença é negativa. 9 8 7 6 5 4 3 2 1 0 Jan. Fev. Mar. Abr. Maio Jun. Jul. Ago. Set. Out. Nov. Dez. Receitas Despesas']\n\n[[placeholder]]\nQual é a mediana, em milhão de reais, dos valores dos lucros apurados pela empresa nesse ano?\n\nA. 1,5\nB. 2,0\nC. 2,9\nD. 3,0\nE. 5,5\nResponda com a alternativa correta.\n",
     "model_response": "A alternativa correta é **A. 1,5**\n\n**Explicação:**\n\n1. **Ordenar os dados:** Em uma distribuição de dados, é importante ordenar os dados em ordem crescente (do menor para o maior). Neste caso, temos os valores de Receitas e Despesas.\n\n2. **Calcular a média:** A média dos valores de Receitas e Despesas é (9 + 8 + 7 + 6 + 5 + 4 + 3 + 2 + 1 + 0) / 10 = 45 / 10 = 4,5.\n\n3. **Calcular a mediana:** A mediana é o valor do meio quando os dados são ordenados. Como temos 10 valores, a mediana é o valor do meio, que é o 5º valor (já que temos números pares).\n\nPortanto, a mediana é 4,5, que é equivalente a 1,5 milhão de reais.",
     "label": "D",
