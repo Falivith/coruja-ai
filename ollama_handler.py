@@ -5,7 +5,8 @@ import requests
 app = FastAPI()
 
 OLLAMA_URL = "http://localhost:11434/api/generate"
-MODEL_NAME = "gemma3:4b"
+MODEL_NAME = "gemma3:1b"
+#MODEL = "gemma3n:e2b"
 
 class Prompt(BaseModel):
     text: str

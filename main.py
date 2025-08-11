@@ -9,9 +9,9 @@ import requests
 
 print(sd.query_devices())
 
-samplerate = 44100
+samplerate = 48000
 duration = 10
-device_id = 4
+device_id = 1
 for rate in [8000, 11025, 16000, 22050, 32000, 44100, 48000]:
     try:
         sd.check_input_settings(device=device_id, samplerate=rate)
@@ -22,7 +22,7 @@ for rate in [8000, 11025, 16000, 22050, 32000, 44100, 48000]:
 API_URL = "http://localhost:8000/ask"
 
 print("Starting system... Loading Whisper model...")
-model = whisper.load_model("tiny", device="cpu")
+model = whisper.load_model("small", device="cpu")
 print("Model loaded. Press and hold [f9] to record.")
 
 recording = False
@@ -126,7 +126,7 @@ def record():
         f.write(transcription + "\n\n")
         f.write(f"Transcription time: {transcription_time:.2f} seconds\n")
 
-    #send_transcription_to_api(transcription)
+    send_transcription_to_api(transcription)
 
 
 while True:
