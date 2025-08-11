@@ -22,7 +22,7 @@ for rate in [8000, 11025, 16000, 22050, 32000, 44100, 48000]:
 API_URL = "http://localhost:8000/ask"
 
 print("Starting system... Loading Whisper model...")
-model = whisper.load_model("small", device="cpu")
+model = whisper.load_model("base", device="cpu")
 print("Model loaded. Press and hold [f9] to record.")
 
 recording = False
@@ -32,7 +32,7 @@ def send_transcription_to_api(transcription_text):
     payload = {
         "text": transcription_text, 
         "pre-prompt": "Atenção: responda com a menor quantidade de palavras possível. Não use emojis, não explique, apenas responda a pergunta com precisão e objetividade. Se não houver pergunta, diga 'Nada a responder'.",
-        "model": "qwen3:4b"
+        "model": "gemma3n:2b"
     }
 
     os.makedirs("logs", exist_ok=True)
